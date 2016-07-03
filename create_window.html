@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Create Widnow</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+        <!-- Carregando jquery -->
+        <script type="text/javascript" src="js/jquery.js"></script>
+        <script type="text/javascript" src="js/jquery-ui.js"></script>
+        <link href="css/estilo.css" rel="stylesheet" /> 
+
+        <!-- Carregando o plugin -->
+    </head>
+    <body>
+        <ul>
+            <li>
+                <a onclick="cw({usuario: '1'})" href="#">Laranja</a>
+            </li>
+            <li>
+                <a onclick="cw({usuario: '2'})" href="#">Abacate</a>
+            </li>
+            <li>
+                <a onclick="cw({usuario: '3'})" href="#">Mamão</a>
+            </li>
+        </ul>
+
+        <script>
+            $(function() {
+            });
+
+            function cw(p) {
+
+                var window = '<div class="window" id="window' + p.usuario + '">\n\
+                                <header>\n\
+                                    windowID = ' + p.usuario + '\
+                                    <button class="btnCloseWindow" data-window="#window' + p.usuario + '" >X</button>\n\
+                                </header>\n\
+                                <section></section>\n\
+                             </div>';
+
+                var windowID = $(window).attr("id");
+                var atual = "div#" + windowID;
+                var $myDiv = $(atual);
+                if ($myDiv.length) {
+                    console.log('Já carregado');
+                } else {
+                    buildWindow(window, atual);
+                }
+            }
+
+            function buildWindow(window, atual) {
+
+                var zindex = 1;
+
+                $('body').append(window).show('slow');
+
+                $(atual).draggable(
+                        {
+                            //axis: "y", 
+                            //containment: "window",
+                            scroll: false
+                        });
+
+                $(atual).click(function() {
+                    zindex += 1;
+                    $(this).css('z-index', zindex);
+                });
+
+                $(".btnCloseWindow").click(function() {
+                    closeWindow($(this).attr("data-window"));
+                });
+
+                $(atual).position({
+                    my: "center top",
+                    at: "center",
+                    of: "body"
+                });
+            }
+
+            function closeWindow(window) {
+                $(window).remove();
+            }
+        </script>  
+    </body>
+</html>
