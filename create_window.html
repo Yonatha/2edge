@@ -14,13 +14,13 @@
 <body>
 <ul>
     <li>
-        <a onclick="cw({usuario: '1'})" href="#">Laranja</a>
+        <a onclick="windowBuilder({usuario: '1'})" href="#">Laranja</a>
     </li>
     <li>
-        <a onclick="cw({usuario: '2'})" href="#">Abacate</a>
+        <a onclick="windowBuilder({usuario: '2'})" href="#">Abacate</a>
     </li>
     <li>
-        <a onclick="cw({usuario: '3'})" href="#">Mamão</a>
+        <a onclick="windowBuilder({usuario: '3'})" href="#">Mamão</a>
     </li>
 </ul>
 
@@ -28,7 +28,7 @@
 </div>
 
 <script>
-    function cw(p) {
+    function windowBuilder(p) {
 
         var window = '<div class="window" id="window_' + p.usuario + '">\n\
                                 <header>\n\
