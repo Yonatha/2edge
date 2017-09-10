@@ -5,11 +5,14 @@ body {
     background-image: -moz-linear-gradient(0deg, #AFBCC8 0%, #DDE4EA);
     border-top: 1px solid #9CACBC;
     color: #212F40;
-    font-family: proxima-nova,"Helvetica Neue",Arial,sans-serif;
+    font-family: proxima-nova, "Helvetica Neue", Arial, sans-serif;
     height: 100%;
     overflow: hidden;
+    padding: 0;
+    margin: 0;
 }
-.window{
+
+.window {
     width: 577px;
     height: 500px;
     background: #fff;
@@ -31,15 +34,25 @@ body {
     padding: 10px 14px 5px;
     padding: 6px;
 }
-.window:hover header{
+
+.window:hover header {
     background-color: #F2F2F2;
 }
+
 .window section {
     padding: 20px;
 }
+
 .foreword {
     opacity: 1;
 }
+
 .background {
     opacity: 0.5;
+}
+
+.minimize {
+    height: 30px;
+    float: left;
+    background: #fff;
 }

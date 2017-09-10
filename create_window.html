@@ -1,85 +1,102 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Create Widnow</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<head>
+    <title>Create Widnow</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-        <!-- Carregando jquery -->
-        <script type="text/javascript" src="js/jquery.js"></script>
-        <script type="text/javascript" src="js/jquery-ui.js"></script>
-        <link href="css/estilo.css" rel="stylesheet" /> 
+    <!-- Carregando jquery -->
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/jquery-ui.js"></script>
+    <link href="css/estilo.css" rel="stylesheet"/>
 
-        <!-- Carregando o plugin -->
-    </head>
-    <body>
-        <ul>
-            <li>
-                <a onclick="cw({usuario: '1'})" href="#">Laranja</a>
-            </li>
-            <li>
-                <a onclick="cw({usuario: '2'})" href="#">Abacate</a>
-            </li>
-            <li>
-                <a onclick="cw({usuario: '3'})" href="#">Mamão</a>
-            </li>
-        </ul>
+    <!-- Carregando o plugin -->
+</head>
+<body>
+<ul>
+    <li>
+        <a onclick="cw({usuario: '1'})" href="#">Laranja</a>
+    </li>
+    <li>
+        <a onclick="cw({usuario: '2'})" href="#">Abacate</a>
+    </li>
+    <li>
+        <a onclick="cw({usuario: '3'})" href="#">Mamão</a>
+    </li>
+</ul>
 
-        <script>
-            $(function() {
-            });
+<div id="taskbar" style="width: 100%; height: 30px; border: 1px solid red; position: absolute; bottom: 0;">
+</div>
 
-            function cw(p) {
+<script>
+    function cw(p) {
 
-                var window = '<div class="window" id="window' + p.usuario + '">\n\
+        var window = '<div class="window" id="window_' + p.usuario + '">\n\
                                 <header>\n\
                                     windowID = ' + p.usuario + '\
-                                    <button class="btnCloseWindow" data-window="#window' + p.usuario + '" >X</button>\n\
+                                    <button onclick="minimizeWindow(' + p.usuario + ')">_</button>\n\
+                                    <button onclick="maximizeWindow(' + p.usuario + ')">[ ]</button>\n\
+                                    <button onclick="closeWindow(' + p.usuario + ')">X</button>\n\
                                 </header>\n\
                                 <section></section>\n\
                              </div>';
 
-                var windowID = $(window).attr("id");
-                var atual = "div#" + windowID;
-                var $myDiv = $(atual);
-                if ($myDiv.length) {
-                    console.log('Já carregado');
-                } else {
-                    buildWindow(window, atual);
-                }
-            }
+        var windowID = $(window).attr("id");
+        var atual = "div#" + windowID;
+        var $myDiv = $(atual);
+        if ($myDiv.length) {
+            console.log('Já carregado');
+        } else {
+            buildWindow(window, atual);
+        }
+    }
 
-            function buildWindow(window, atual) {
+    function buildWindow(window, atual) {
 
-                var zindex = 1;
+        var zindex = 1;
 
-                $('body').append(window).show('slow');
+        $('body').append(window).show('slow');
 
-                $(atual).draggable(
-                        {
-                            //axis: "y", 
-                            //containment: "window",
-                            scroll: false
-                        });
+        $(atual).draggable(
+            {
+                //axis: "y",
+                //containment: "window",
+                scroll: false
+            });
 
-                $(atual).click(function() {
-                    zindex += 1;
-                    $(this).css('z-index', zindex);
-                });
+        $(atual).click(function () {
+            zindex += 1;
+            $(this).css('z-index', zindex);
+        });
 
-                $(".btnCloseWindow").click(function() {
-                    closeWindow($(this).attr("data-window"));
-                });
+        $(".btnCloseWindow").click(function () {
+            ;
+        });
 
-                $(atual).position({
-                    my: "center top",
-                    at: "center",
-                    of: "body"
-                });
-            }
+        $(".btnMinimizar").click(function () {
+            minimizeWindow($(this).attr("data-window"));
+        });
 
-            function closeWindow(window) {
-                $(window).remove();
-            }
-        </script>  
-    </body>
+        $(atual).position({
+            my: "center top",
+            at: "center",
+            of: "body"
+        });
+    }
+
+    function closeWindow(id) {
+        $("#window_" + id).remove();
+    }
+
+    function minimizeWindow(id) {
+        $("#window_" + id).appendTo('#taskbar')
+        $("#window_" + id).addClass('minimize')
+        $("#window_" + id).removeClass('window')
+    }
+    function maximizeWindow(id) {
+        $("#window_" + id).appendTo('body')
+        $("#window_" + id).addClass('window');
+        $("#window_" + id).removeClass('minimize');
+    }
+</script>
+</body>
 </html>
