@@ -24,7 +24,7 @@
     </li>
 </ul>
 
-<div id="taskbar" style="width: 100%; height: 30px; border: 1px solid red; position: absolute; bottom: 0;">
+<div id="taskbar">
 </div>
 
 <script>
@@ -32,10 +32,12 @@
 
         var window = '<div class="window" id="window_' + p.usuario + '">\n\
                                 <header>\n\
-                                    windowID = ' + p.usuario + '\
-                                    <button onclick="minimizeWindow(' + p.usuario + ')">_</button>\n\
-                                    <button onclick="maximizeWindow(' + p.usuario + ')">[ ]</button>\n\
-                                    <button onclick="closeWindow(' + p.usuario + ')">X</button>\n\
+                                <label>windowID = '+ p.usuario +'</label>\n\
+                                <div class="window_buttons">\n\
+                                    <button class="btn_minimize" onclick="minimizeWindow(' + p.usuario + ')">_</button>\n\
+                                    <button class="btn_maximize" onclick="maximizeWindow(' + p.usuario + ')">[ ]</button>\n\
+                                    <button class="btn_close" onclick="closeWindow(' + p.usuario + ')">X</button>\n\
+                                </div>\n\
                                 </header>\n\
                                 <section></section>\n\
                              </div>';
@@ -91,11 +93,13 @@
         $("#window_" + id).appendTo('#taskbar')
         $("#window_" + id).addClass('minimize')
         $("#window_" + id).removeClass('window')
+        $("#window_" + id + ' .btn_minimize').hide();
     }
     function maximizeWindow(id) {
         $("#window_" + id).appendTo('body')
         $("#window_" + id).addClass('window');
         $("#window_" + id).removeClass('minimize');
+        $("#window_" + id + ' .btn_minimize').show();
     }
 </script>
 </body>
